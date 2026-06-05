@@ -90,6 +90,7 @@ nav:
   - M7 开发实践:
     - 24 开发环境配置: 24-dev-setup.md
     - 25 调试与日志: 25-debugging.md
+    - 26 测试策略: 26-testing.md
 
 # 排除 docs/ 下不参与构建的文件(build 阶段就剔除,不读不渲染)
 # 注意:必须用 exclude_docs 而不是 not_in_nav。
