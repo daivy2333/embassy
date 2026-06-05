@@ -67,10 +67,10 @@ embedded-io-async = { version = "0.7.0" }
 ```
 
 **关键事实**（已在 02-architecture.md §3.4 强调）：
-- ❌ 不依赖 `embassy-executor`
-- ❌ 不依赖 `embassy-time`
-- ❌ 不依赖任何 `embassy-*` crate
-- ✅ 依赖**通用** no_std 生态（`futures-core` / `heapless` / `critical-section`）
+- 不依赖 `embassy-executor`
+- 不依赖 `embassy-time`
+- 不依赖任何 `embassy-*` crate
+- 依赖**通用** no_std 生态（`futures-core` / `heapless` / `critical-section`）
 
 **意味着什么**：
 - `embassy-sync` 可以用于 **RTIC**、**smoltcp**、**裸机**、**任何 async runtime**
@@ -369,15 +369,15 @@ fn isr() {
 |------|---------------------|------------------------|
 | `lock()` | **阻塞线程** | **await future**（不阻塞执行器） |
 | `try_lock()` | 立即返回 | 立即返回 |
-| 持锁期间可 `.await`？ | ❌（deprecation） | ✅（但要小心） |
-| 递归锁 | ❌ | ✅（`RawMutex` 允许重入） |
+| 持锁期间可 `.await`？ | （deprecation） | （但要小心） |
+| 递归锁 | | （`RawMutex` 允许重入） |
 
 **最关键差异**：`lock().await` **不阻塞** executor —— 等待期间其他任务可运行。
 
 ### 6.4 持锁 await 的危险性
 
 ```rust
-// ⚠️ 危险：持锁 await 其他原语
+// 注:危险：持锁 await 其他原语
 COUNTER.lock().await.send(other_chan).await
 //                       ↑ 如果 other_chan 也想 lock COUNTER → 死锁
 ```
@@ -525,8 +525,8 @@ async fn subscriber1() {
 | 文件 | 通用性 | 性能 |
 |------|--------|------|
 | `waker_registration.rs` | 最基础（1 个 waker） | 直接 |
-| `atomic_waker.rs`（默认） | 中（4 状态机无锁） | ⚡ 高 |
-| `atomic_waker_turbo.rs` | 需 nightly + 特殊编译 | ⚡ 最高 |
+| `atomic_waker.rs`（默认） | 中（4 状态机无锁） | 高 |
+| `atomic_waker_turbo.rs` | 需 nightly + 特殊编译 |  最高 |
 | `critical_section_waker.rs` | 通用 | 中（临界区） |
 | `multi_waker.rs` | 多个 waker 同时等 | 中 |
 
@@ -717,9 +717,9 @@ async fn error_handler() { /* subscribe + error only */ }
 ## 14. 参考
 
 - **本仓库**：
-  - `learn/02-architecture.md` §3.4 —— embassy-sync 依赖
-  - `learn/03-async-fundamentals.md` §6.1 —— AtomicWaker 4 状态机
-  - `learn/07-futures.md`（M2.4）—— select/join 怎么用这些原语
+  - `docs/02-architecture.md` §3.4 —— embassy-sync 依赖
+  - `docs/03-async-fundamentals.md` §6.1 —— AtomicWaker 4 状态机
+  - `docs/07-futures.md`（M2.4）—— select/join 怎么用这些原语
 - **官方**：
   - [embassy-rs/embassy/tree/main/embassy-sync](https://github.com/embassy-rs/embassy/tree/main/embassy-sync) — 源码
   - [docs.embassy.dev/embassy-sync](https://docs.embassy.dev/embassy_sync/) — API 文档

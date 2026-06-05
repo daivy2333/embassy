@@ -36,8 +36,8 @@ graph TD
 |------|---------------|--------------|---------|-------------------|
 | 提供 | `Future` trait | 完整生态 | 运行时 + 工具 | **仅 4 个组合子** |
 | 代码量 | 0（标准库） | ~5 万行 | ~10 万行 | < 500 行 |
-| 阻塞运行 | ❌ | ❌（需要 executor） | ✅ `block_on` | ✅ `block_on` |
-| 取消 | ❌ | `tokio::select!` 宏 | `JoinHandle::abort()` | `select` 隐式 |
+| 阻塞运行 | | （需要 executor） | `block_on` | `block_on` |
+| 取消 | | `tokio::select!` 宏 | `JoinHandle::abort()` | `select` 隐式 |
 | 与 `executor` 关系 | 无关 | 无关 | 自带 runtime | **完全独立** |
 
 **embassy-futures 哲学**：只做"用户级组合子"，**不提供 executor**。用户用 `embassy-executor`，但 `embassy-futures` 提供的工具对**任何** runtime 都可用（tokio / async-std / smoltcp 都能用）。
@@ -90,15 +90,15 @@ impl Future for YieldNowFuture {
 
 ### 3.3 busy-loop 陷阱（必须警惕）
 
-⚠️ `yield_now` **100% 占用 CPU**（除非被其他高优先级任务抢占）：
+注:`yield_now` **100% 占用 CPU**（除非被其他高优先级任务抢占）：
 
 ```rust
-// ❌ 反面示例
+// 反面示例
 while !some_condition() {
     yield_now().await;   // 不停 yield + 立即 ready，busy-loop
 }
 
-// ✅ 正确做法
+// 正确做法
 while !some_condition() {
     Timer::after(Duration::from_millis(10)).await;  // 让出 + 睡眠
 }
@@ -108,11 +108,11 @@ while !some_condition() {
 
 | 场景 | 用 yield_now？ |
 |------|----------------|
-| 等待一个**微秒内**可能就绪的硬件标志 | ✅ |
-| 轮询 DMA 状态 | ✅ |
-| 实现"自旋锁"行为 | ✅ |
-| 等待**毫秒级**事件 | ❌ 用 `Timer::after` |
-| 等待**秒级**事件 | ❌ 用 `Timer::after` |
+| 等待一个**微秒内**可能就绪的硬件标志 | |
+| 轮询 DMA 状态 | |
+| 实现"自旋锁"行为 | |
+| 等待**毫秒级**事件 | 用 `Timer::after` |
+| 等待**秒级**事件 | 用 `Timer::after` |
 
 ---
 
@@ -201,9 +201,9 @@ let res = join3(read1, read2, read3).await;
 
 | 操作 | cancel safety |
 |------|---------------|
-| `join` 整体 drop | ✅ 安全（所有 future 都被 drop） |
+| `join` 整体 drop | 安全（所有 future 都被 drop） |
 | 任一 future 返回 `Ready` | 不影响其他 |
-| `take_output` 前 drop | ⚠️ 已经在 Done 状态的结果会丢（但 future 不会被"卡死"） |
+| `take_output` 前 drop | 注:已经在 Done 状态的结果会丢（但 future 不会被"卡死"） |
 
 **核心保证**：join 不会"卡死"任何 future —— 所有 future 要么完成、要么被一起 drop。
 
@@ -211,7 +211,7 @@ let res = join3(read1, read2, read3).await;
 
 | API | 来源 | 差异 |
 |-----|------|------|
-| `std::future::join` | ❌（std 没有） | — |
+| `std::future::join` | （std 没有） | — |
 | `futures::future::join` | `futures` crate | API 几乎一样，依赖 `futures-util` |
 | `tokio::join!` | `tokio` | 宏形式（不是函数），`tokio` 专属 |
 | `embassy_futures::join` | `embassy-futures` | 函数形式，无运行时依赖 |
@@ -299,10 +299,10 @@ loop {
 
 | 特性 | 支持？ |
 |------|--------|
-| 嵌套 select | ✅（`select(select(a, b), c)`） |
-| `default` 分支（tokio 风格） | ❌（用 `Either` 自己 match） |
-| `biased` 参数（tokio 风格） | ❌（始终按参数顺序 poll） |
-| 取消另一个 future | ❌（drop 整个 Select 才取消） |
+| 嵌套 select | （`select(select(a, b), c)`） |
+| `default` 分支（tokio 风格） | （用 `Either` 自己 match） |
+| `biased` 参数（tokio 风格） | （始终按参数顺序 poll） |
+| 取消另一个 future | （drop 整个 Select 才取消） |
 
 ### 5.5 与 std/tokio 对比
 
@@ -357,7 +357,7 @@ pub fn block_on<F: Future>(mut fut: F) -> F::Output {
 
 **反直觉警告**：
 ```rust
-// ❌ 这不会工作
+// 这不会工作
 block_on(async {
     Timer::after(Duration::from_secs(1)).await;   // 永远 Pending！
     println!("after 1 sec");
@@ -390,8 +390,8 @@ pub fn poll_once<F: Future>(mut fut: F) -> Poll<F::Output> {
 | 阻塞类型 | 内部 sleep 等待 | **busy-loop** |
 | 任务调度 | tokio runtime | 没有（单 future） |
 | 时间 | 内置 IO/timer | 依赖 future 自己 |
-| 多 future | ✅ 内部 | ❌（用 join 包） |
-| 多线程 | ✅ | ❌（单线程） |
+| 多 future | 内部 | （用 join 包） |
+| 多线程 | | （单线程） |
 
 **结论**：`embassy_futures::block_on` 只适合**测试**和**简单 demo**，不适合生产。
 
@@ -473,10 +473,10 @@ async fn complex_workflow() -> Result<(), Error> {
 
 | 组合子 | cancel safety |
 |--------|---------------|
-| `yield_now` | ✅ 完全 |
-| `join` | ✅ 整体 drop 安全 |
-| `select` | ⚠️ 未选中的 future 会被 drop（可能丢数据） |
-| `block_on` | ❌ 不可 drop（必须完成） |
+| `yield_now` | 完全 |
+| `join` | 整体 drop 安全 |
+| `select` | 注:未选中的 future 会被 drop（可能丢数据） |
+| `block_on` | 不可 drop（必须完成） |
 
 ### 8.3 实战判断清单
 
@@ -509,11 +509,11 @@ async fn complex_workflow() -> Result<(), Error> {
 | 代码量 | < 500 行 | ~5 万行 | ~10 万行 |
 | `join` | 函数 + 5 变体 | 函数 + 5 变体 | 宏 `join!` |
 | `select` | 函数 + 3 变体 | 函数 + `Either` | 宏 `select!` + `default` + `biased` |
-| `block_on` | ✅（busy-loop） | ❌ | ✅（runtime） |
-| `yield_now` | ✅ | ✅ | ✅ |
+| `block_on` | （busy-loop） | | （runtime） |
+| `yield_now` | | | |
 | 依赖 | 0 | `futures-util` 等 | `tokio` runtime |
-| `no_std` | ✅ | 部分 | ❌ |
-| 用于 Embassy | ✅ | ✅ | ❌（不能） |
+| `no_std` | | 部分 | |
+| 用于 Embassy | | | （不能） |
 
 **embassy-futures 的独特定位**：
 - **no_std 友好** —— 任何嵌入式项目可用
@@ -574,9 +574,9 @@ M2.4 07-futures.md  (本文)    → 4 个组合子
 ## 13. 参考
 
 - **本仓库**：
-  - `learn/03-async-fundamentals.md` §6.3 — yield_now 详解
-  - `learn/04-executor.md` · `learn/05-time.md` · `learn/06-sync.md`
-  - `learn/08-hal-architecture.md`（M3.1）—— 紧接 M2 收官
+  - `docs/03-async-fundamentals.md` §6.3 — yield_now 详解
+  - `docs/04-executor.md` · `docs/05-time.md` · `docs/06-sync.md`
+  - `docs/08-hal-architecture.md`（M3.1）—— 紧接 M2 收官
 - **官方**：
   - [embassy-rs/embassy/tree/main/embassy-futures](https://github.com/embassy-rs/embassy/tree/main/embassy-futures) — 源码
   - [docs.embassy.dev/embassy-futures](https://docs.embassy.dev/embassy_futures/) — API 文档

@@ -50,13 +50,13 @@
 
 | 平台 | Crate | 状态 |
 |------|-------|------|
-| STM32 | embassy-stm32 | ✅ 活跃 |
-| nRF52/53/54/91 | embassy-nrf | ✅ 活跃 |
-| RP2040/235x | embassy-rp | ✅ 活跃 |
-| ESP32 | esp-hal (外部) | ✅ 活跃 |
-| NXP MCX-A | embassy-mcxa | ✅ 活跃 |
-| TI MSPM0 | embassy-mspm0 | ✅ 活跃 |
-| Microchip | embassy-microchip | ✅ 活跃 |
+| STM32 | embassy-stm32 | 活跃 |
+| nRF52/53/54/91 | embassy-nrf | 活跃 |
+| RP2040/235x | embassy-rp | 活跃 |
+| ESP32 | esp-hal (外部) | 活跃 |
+| NXP MCX-A | embassy-mcxa | 活跃 |
+| TI MSPM0 | embassy-mspm0 | 活跃 |
+| Microchip | embassy-microchip | 活跃 |
 
 ## 外部资源
 

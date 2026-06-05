@@ -10,7 +10,7 @@
 
 | 项 | 内容 |
 |---|------|
-| **范围** | M3 架构 ADR(写入 `openspec/specs/architecture/spec.md`)+ M3.1 文档(`learn/08-hal-architecture.md`)|
+| **范围** | M3 架构 ADR(写入 `openspec/specs/architecture/spec.md`)+ M3.1 文档(`docs/08-hal-architecture.md`)|
 | **不在范围** | M3.2/3.3/3.4(stm32/nrf/rp 平台篇)|
 | **依赖** | M1(架构)+ M2(executor/time/sync/futures)已完成 |
 | **CodeGraph 状态** | ✅ healthy(46966 节点 / 1953 Rust 文件)|
@@ -146,7 +146,7 @@
 # {N}-{title}
 
 > 撰写:2026-06-05  
-> 前置:learn/{前置文档}
+> 前置:docs/{前置文档}
 
 ## 目录
 1. ...
@@ -172,38 +172,38 @@
 ```
 
 **写作要点**:
-- 关键流程用 Mermaid 图(参考 `learn/02-architecture.md` 拓扑图、`learn/05-time.md` wake 链)
-- 术语首次出现给定义(参考 `learn/03-async-fundamentals.md`)
+- 关键流程用 Mermaid 图(参考 `docs/02-architecture.md` 拓扑图、`docs/05-time.md` wake 链)
+- 术语首次出现给定义(参考 `docs/03-async-fundamentals.md`)
 - 表格 > 文字(对比、矩阵)
 - 每章 ≥ 1 处源码引用
 - 行数 500-800
 
 ---
 
-### Step B3: 写入 learn/08-hal-architecture.md(30m)
+### Step B3: 写入 docs/08-hal-architecture.md(30m)
 
 **执行**:
-1. `Write learn/08-hal-architecture.md`(新文件,可用 Write)
+1. `Write docs/08-hal-architecture.md`(新文件,可用 Write)
 2. 如果一次输出过长 → 分步:先写 1-4 节,再 Edit 追加 5-9 节
 
 **Verify B3**:
-- ✅ `wc -l learn/08-hal-architecture.md`(500-800 行)
-- ✅ `grep -c "^## " learn/08-hal-architecture.md`(≥ 9 节)
-- ✅ `grep -cE "\\.rs:[0-9]+" learn/08-hal-architecture.md`(≥ 9 处源码引用)
+- ✅ `wc -l docs/08-hal-architecture.md`(500-800 行)
+- ✅ `grep -c "^## " docs/08-hal-architecture.md`(≥ 9 节)
+- ✅ `grep -cE "\\.rs:[0-9]+" docs/08-hal-architecture.md`(≥ 9 处源码引用)
 
 ---
 
 ### Step B4: 自验(15m)
 
 **对照 M2 文档风格**:
-1. `wc -l learn/0[4-7]*.md learn/08-hal-architecture.md` → 行数在 M2 范围内
-2. `grep -c "```rust" learn/08-hal-architecture.md` → 代码片段密度合理
-3. `grep -c "```mermaid" learn/08-hal-architecture.md` → 至少 1 处 Mermaid 图
+1. `wc -l docs/0[4-7]*.md docs/08-hal-architecture.md` → 行数在 M2 范围内
+2. `grep -c "```rust" docs/08-hal-architecture.md` → 代码片段密度合理
+3. `grep -c "```mermaid" docs/08-hal-architecture.md` → 至少 1 处 Mermaid 图
 4. 抽样读 1-2 章,人工检查术语/语气与 M2 一致
 
 **Karpathy 监察**:
 - ✅ Simplicity:无投机性章节(只写大纲列的 9 节)
-- ✅ Surgical Changes:不动 learn/01-07
+- ✅ Surgical Changes:不动 docs/01-07
 - ✅ Requirements Integrity:9 节全覆盖,无裁剪
 
 ---
@@ -211,7 +211,7 @@
 ## 5. Phase C: 收尾(预估 15m)
 
 ### Step C1: 更新 tasks.md
-1. `Edit` 把 M3.1 任务行 `状态:待办` → `✅ 完成`,补 `产出:learn/08-hal-architecture.md (XXX 行)`
+1. `Edit` 把 M3.1 任务行 `状态:待办` → `✅ 完成`,补 `产出:docs/08-hal-architecture.md (XXX 行)`
 2. `Edit` 在"已完成"区追加条目:`| 2026-06-05 | M3.1 ... | ✅ 完成 |`
 3. `Edit` 进度统计 M3 行:`0 → 1`、总计 `7/27 → 8/27`
 
@@ -271,7 +271,7 @@ graph TD
     A3 --> VA[Verify A: grep 编号 + 内容]
     VA --> B1[Step B1: codegraph 深度探索 9 节]
     B1 --> B2[Step B2: 起草章节]
-    B2 --> B3[Step B3: Write learn/08]
+    B2 --> B3[Step B3: Write docs/08]
     B3 --> B4[Step B4: 自验风格行数]
     B4 --> C1[Step C1: tasks.md]
     C1 --> C2[Step C2: SNAPSHOT.md]
@@ -298,7 +298,7 @@ graph TD
 | 时机 | 建议 commit 信息 |
 |------|------------------|
 | Phase A 完成 | `M3: 架构 ADR 入档(术语 + 章节模板 + 对比维度)` |
-| Phase B 完成 | `M3.1: HAL 架构(learn/08-hal-architecture.md, {N} 行)` |
+| Phase B 完成 | `M3.1: HAL 架构(docs/08-hal-architecture.md, {N} 行)` |
 | Phase C 完成 | `tasks/SNAPSHOT/learned: M3.1 收官同步(8/27, 30%)` |
 
 (commit 由用户决定何时执行,workflow 不主动 git commit)

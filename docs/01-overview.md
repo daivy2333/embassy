@@ -30,17 +30,17 @@
 
 FreeRTOS 通过定时器中断强制切换任务，保证公平性；Embassy 信任每个任务在 `await` 点主动让出。后果：
 
-- ✅ 切换成本极低（仅寄存器保存/恢复，无栈拷贝）
-- ✅ 任务间无共享栈，无栈溢出风险
-- ⚠️ 一个 `while x { }` 死循环会卡死整个系统
-- ⚠️ 长任务需要主动 `yield_now().await`（见 `embassy-futures`）
+- 切换成本极低（仅寄存器保存/恢复，无栈拷贝）
+- 任务间无共享栈，无栈溢出风险
+- 注:一个 `while x { }` 死循环会卡死整个系统
+- 注:长任务需要主动 `yield_now().await`（见 `embassy-futures`）
 
 ### 2.2 零堆的代价
 
 所有任务槽、Channel、缓冲在编译期固定。运行时没有 `malloc`/`free`。
-- ✅ 无内存碎片、无分配失败
-- ⚠️ 配置项变多（`task-arena-size`、`signal-count` 等）
-- ⚠️ 调整容量需重新编译
+- 无内存碎片、无分配失败
+- 注:配置项变多（`task-arena-size`、`signal-count` 等）
+- 注:调整容量需重新编译
 
 ---
 
@@ -243,9 +243,9 @@ async fn main(spawner: Spawner) {
 ## 8. 参考
 
 - **本仓库**：
-  - `learn/embassy.md` — Embassy 项目的中文介绍（更详细的特性与历史）
-  - `learn/02-architecture.md` — 紧接本篇，分析 crate 间的依赖与模块关系
-  - `learn/03-async-fundamentals.md` — async/await 在 Embassy 上下文的工作原理
+  - `docs/embassy.md` — Embassy 项目的中文介绍（更详细的特性与历史）
+  - `docs/02-architecture.md` — 紧接本篇，分析 crate 间的依赖与模块关系
+  - `docs/03-async-fundamentals.md` — async/await 在 Embassy 上下文的工作原理
 - **官方资源**：
   - [embassy-rs/embassy](https://github.com/embassy-rs/embassy) — 上游仓库
   - [embassy.dev](https://embassy.dev) — 官方文档站

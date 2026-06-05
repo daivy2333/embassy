@@ -205,7 +205,7 @@ Timer::poll 检查到 expires_at <= now → Ready(())  → 任务 A 继续
 ### 4.1 问题：Timer 累积漂移
 
 ```rust
-// ❌ 这不是"每秒调用 foo()"
+// 这不是"每秒调用 foo()"
 loop {
     foo();                        // 假设耗时 50ms
     Timer::after(Duration::from_secs(1)).await;
@@ -216,7 +216,7 @@ loop {
 ### 4.2 解决：Ticker 固定周期
 
 ```rust
-// ✅ 真正"每秒调用 foo()"
+// 真正"每秒调用 foo()"
 let mut ticker = Ticker::every(Duration::from_secs(1));
 loop {
     foo();
@@ -258,11 +258,11 @@ impl Ticker {
 
 | 场景 | 用 Timer | 用 Ticker |
 |------|----------|-----------|
-| 周期性采集数据 | — | ✅ 固定周期 |
-| 单次 sleep | ✅ | — |
-| 任务节流（避免太频繁） | ✅ | — |
-| 时间敏感采样（每 10ms 一次） | — | ✅ 严格周期 |
-| 防 watchdog 喂狗 | ✅ 简单 | — |
+| 周期性采集数据 | — | 固定周期 |
+| 单次 sleep | | — |
+| 任务节流（避免太频繁） | | — |
+| 时间敏感采样（每 10ms 一次） | — | 严格周期 |
+| 防 watchdog 喂狗 | 简单 | — |
 
 ### 4.5 cancel safety 的微妙之处
 
@@ -383,8 +383,8 @@ embassy_time_driver::time_driver_impl!(static DRIVER: RpTimerDriver = RpTimerDri
 
 | 模式 | Feature | 性能 | 通用性 |
 |------|---------|------|--------|
-| **Integrated queue**（默认） | 无（依赖 `embassy-executor`） | ⚡ 高（直接复用 executor run_queue） | ❌ 只能配 `embassy-executor` |
-| **Generic queue** | `generic-queue-{8,16,32,64,128}` | 较慢（独立数据结构） | ✅ 任何执行器 |
+| **Integrated queue**（默认） | 无（依赖 `embassy-executor`） | 高（直接复用 executor run_queue） | 只能配 `embassy-executor` |
+| **Generic queue** | `generic-queue-{8,16,32,64,128}` | 较慢（独立数据结构） | 任何执行器 |
 
 ### 6.2 怎么选
 
@@ -676,9 +676,9 @@ match select(
 ## 13. 参考
 
 - **本仓库**：
-  - `learn/03-async-fundamentals.md` · `learn/04-executor.md`
-  - `learn/06-sync.md`（M2.3）—— Channel/Signal/Mutex
-  - `learn/07-futures.md`（M2.4）—— select/join
+  - `docs/03-async-fundamentals.md` · `docs/04-executor.md`
+  - `docs/06-sync.md`（M2.3）—— Channel/Signal/Mutex
+  - `docs/07-futures.md`（M2.4）—— select/join
 - **官方**：
   - [embassy-rs/embassy/tree/main/embassy-time](https://github.com/embassy-rs/embassy/tree/main/embassy-time) — 源码
   - [docs.embassy.dev/embassy-time](https://docs.embassy.dev/embassy_time/) — API 文档

@@ -20,29 +20,51 @@
 ## 项目结构
 
 ```
-embassy/
-├── embassy-executor/          # 异步执行器
-├── embassy-time/              # 时间管理
-├── embassy-sync/              # 同步原语
-├── embassy-futures/           # Future 工具
-├── embassy-net/               # 网络栈
-├── embassy-usb/               # USB 栈
-├── embassy-boot/              # Bootloader
-├── embassy-hal-internal/      # HAL 内部抽象
-├── embassy-nrf/               # nRF 平台 HAL
-├── embassy-stm32/             # STM32 平台 HAL
-├── embassy-rp/                # RP2040/235x 平台 HAL
-├── embassy-mcxa/              # NXP MCX-A 平台 HAL
-├── embassy-mspm0/             # TI MSPM0 平台 HAL
-├── embassy-microchip/         # Microchip 平台 HAL
-├── embassy-imxrt/             # i.MX RT 平台 HAL
-├── embassy-stm32-wpan/        # STM32 WPAN (BLE)
-├── cyw43/                     # CYW43 WiFi 驱动
-├── cyw43-pio/                 # CYW43 PIO 驱动
-├── examples/                  # 示例代码（按平台分）
-├── tests/                     # 集成测试
-├── docs/                      # 文档
-└── release/                   # 发布脚本
+embassy/                              # fork 自 embassy-rs/embassy
+├── docs/                             # 学习文档(MkDocs 站点 + Markdown 源)
+│   ├── index.md                      #   站点首页
+│   ├── embassy.md                    #   项目概览(M0)
+│   ├── 01-overview.md ~ 11-rp.md     #   M1/M2/M3 已完成(11 篇)
+│   └── 12-*.md ~ 27-*.md             #   M4-M7 待启动
+├── ori_docs/                         # fork 原始 docs(AsciiDoc),已归档
+├── CLAUDE.md                         # 项目入口 + 规则唯一事实来源
+├── mkdocs.yml                        # MkDocs Material 站点配置
+├── requirements.txt                  # MkDocs Python 依赖
+├── .github/workflows/docs.yml        # GitHub Pages 自动部署
+├── .claude/                          # 项目状态与 agent 配置
+│   ├── docs/SNAPSHOT.md              #   本文件,状态快照
+│   ├── docs/tasks.md                 #   任务追踪
+│   └── docs/superpowers/plan/        #   workflow plan 文档(M3.1/M3.2 等)
+├── openspec/                         # OpenSpec 规范管理
+│   ├── config.yaml                   #   配置
+│   ├── specs/architecture/spec.md    #   架构 ADR(含 ADR-001~004)
+│   ├── specs/learned/spec.md         #   学习记忆(踩坑+技巧+API 速查)
+│   ├── specs/references/spec.md      #   外部参考
+│   └── specs/optimization/spec.md    #   优化点(OPT-001 已完成)
+├── .codegraph/                       # CodeGraph SQLite 索引(本地,~85MB)
+│
+├── embassy-executor/                 # 异步执行器(M2.1)
+├── embassy-time/                     # 时间管理(M2.2)
+├── embassy-sync/                     # 同步原语(M2.3)
+├── embassy-futures/                  # Future 工具(M2.4)
+├── embassy-net/                      # 网络栈
+├── embassy-usb/                      # USB 栈
+├── embassy-boot/                     # Bootloader
+├── embassy-hal-internal/             # 跨平台 HAL 骨架(M3.1)
+├── embassy-time-driver/              # 时间驱动 trait
+├── embassy-embedded-hal/             # embedded-hal 适配 + shared_bus
+├── embassy-stm32/                    # STM32 平台 HAL(M3.2)
+├── embassy-nrf/                      # nRF 平台 HAL(M3.3)
+├── embassy-rp/                       # RP2040/235x 平台 HAL(M3.4)
+├── embassy-mcxa/                     # NXP MCX-A 平台 HAL
+├── embassy-mspm0/                    # TI MSPM0 平台 HAL
+├── embassy-microchip/                # Microchip 平台 HAL
+├── embassy-imxrt/                    # i.MX RT 平台 HAL
+├── embassy-stm32-wpan/               # STM32 WPAN (BLE)
+├── cyw43/                            # CYW43 WiFi 驱动
+├── cyw43-pio/                        # CYW43 PIO 驱动
+├── examples/                         # 示例代码(按平台分)
+└── tests/                            # 集成测试
 ```
 
 ---
@@ -65,8 +87,9 @@ embassy/
 | 属性 | 值 |
 |------|-----|
 | 当前分支 | main |
-| 最近提交 | e44d3a22e tasks: 补打 M2 收官验收标准 3 项 |
-| 工作区状态 | 12 deleted(LICENSE/CI 残余)+ 修改 .gitignore + 新增 mkdocs.yml / requirements.txt / docs/index.md / .github/workflows/docs.yml + .claude/docs/superpowers/ 等学习项目目录,均未提交 |
+| 最近提交 | 271d25a1d chore(docs): M3 收官 + mkdocs.yml nav 加入 M3 全 4 篇 + 状态同步 |
+| 工作区状态 | OPT-001 emoji 清理 + 文档体系更新(本轮)待 commit |
+| 远端同步 | 上轮 8 commits 已 push(M3.1-3.4 + ADR-004 + CLAUDE.md 规则) |
 
 ---
 
@@ -77,14 +100,13 @@ embassy/
 | `rust-toolchain.toml` | Rust 工具链配置 |
 | `rustfmt.toml` | 格式化配置 |
 | `.vscode/settings.json` | VS Code / Rust Analyzer 配置 |
-| `CLAUDE.md` | 项目入口与规则索引(学习项目) |
-| `docs/index.md` | MkDocs 文档站首页(M1/M2 索引) |
+| `CLAUDE.md` | 项目入口与规则索引(学习项目)|
+| `docs/index.md` | MkDocs 文档站首页 |
 | `mkdocs.yml` | MkDocs Material 站点配置 |
 | `requirements.txt` | MkDocs Python 依赖 |
 | `.github/workflows/docs.yml` | GitHub Pages 自动部署 workflow |
 | `openspec/config.yaml` | OpenSpec 配置 |
-| ~~`learn/README.md`~~ | ⚠️ 内容已迁移至 `docs/`(用户重命名 learn → docs) |
-| ~~`ci.sh` / `fmtall.sh` / `fmtall.ps1`~~ | ⚠️ fork 残余,已删除(学习项目不发布) |
+| `ori_docs/` | fork 原始 docs(AsciiDoc),已归档 |
 
 ---
 
@@ -108,11 +130,11 @@ embassy/
 
 | 文档 | 状态 | 路径 |
 |------|------|------|
-| OpenSpec config | ✅ 已创建 | `openspec/config.yaml` |
-| Architecture spec | ✅ 已创建 | `openspec/specs/architecture/spec.md` |
-| Learned spec | ✅ 已创建 | `openspec/specs/learned/spec.md` |
-| References spec | ✅ 已创建 | `openspec/specs/references/spec.md` |
-| Optimization spec | ✅ 已创建 | `openspec/specs/optimization/spec.md` |
-| CLAUDE.md | ✅ 已创建 | `CLAUDE.md` |
-| CodeGraph 索引 | ✅ healthy | `.codegraph/` |
-| GitHub Pages 站 | 🚀 已配置,待 push 触发 | `mkdocs.yml` + `.github/workflows/docs.yml` |
+| OpenSpec config | (已创建) | `openspec/config.yaml` |
+| Architecture spec | (已创建,含 ADR-001~004) | `openspec/specs/architecture/spec.md` |
+| Learned spec | (已创建,3 条踩坑 + 3 条技巧) | `openspec/specs/learned/spec.md` |
+| References spec | (待充实) | `openspec/specs/references/spec.md` |
+| Optimization spec | (已创建,OPT-001 已完成) | `openspec/specs/optimization/spec.md` |
+| CLAUDE.md | (已创建 + 文档撰写规范已加) | `CLAUDE.md` |
+| CodeGraph 索引 | (健康,46966 节点 / 1953 Rust 文件)| `.codegraph/` |
+| GitHub Pages 站 | (已部署,M3 全 4 篇已加入侧栏) | `mkdocs.yml` + `.github/workflows/docs.yml` |

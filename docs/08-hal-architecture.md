@@ -1,8 +1,8 @@
 # 08 HAL 层架构
 
 > 撰写:2026-06-05
-> 前置:learn/01-overview · learn/02-architecture · learn/03-async-fundamentals
-> 后续:learn/09-stm32 · learn/10-nrf · learn/11-rp(本篇为 3 平台篇定调)
+> 前置:docs/01-overview · docs/02-architecture · docs/03-async-fundamentals
+> 后续:docs/09-stm32 · docs/10-nrf · docs/11-rp(本篇为 3 平台篇定调)
 
 ---
 
@@ -400,7 +400,7 @@ sequenceDiagram
 
 **关键点**:
 - `State` 是 `static`,生命周期独立于驱动实例(典型实现:`AtomicWaker` 或 `embassy_sync::waitqueue::AtomicWaker`)
-- ISR 不直接调用任务代码,只通过 wake() 把任务推回执行器队列(详见 `learn/04-executor.md` 主循环)
+- ISR 不直接调用任务代码,只通过 wake() 把任务推回执行器队列(详见 `docs/04-executor.md` 主循环)
 - 这种"中断只 wake、不工作"的模式让 ISR 极短,符合实时系统设计
 
 ### 5.4 `InterruptExt`:运行时操作中断的 trait
@@ -721,7 +721,7 @@ M3 系列完成后,**M4 外设驱动篇**(GPIO / UART / SPI / I2C / Timer)会聚
 - 规划文档:
   - `openspec/specs/architecture/spec.md` → ADR-004(M3 文档系列统一规划:术语、章节模板、对比维度、CodeGraph 入口)
 - 前置文档:
-  - `learn/02-architecture.md`(crate 拓扑)
-  - `learn/04-executor.md`(执行器主循环 — 第 5 节 wake 链路终点)
-  - `learn/05-time.md`(时间用户 API 与 12 步 wake 链 — 第 6 节的上层)
+  - `docs/02-architecture.md`(crate 拓扑)
+  - `docs/04-executor.md`(执行器主循环 — 第 5 节 wake 链路终点)
+  - `docs/05-time.md`(时间用户 API 与 12 步 wake 链 — 第 6 节的上层)
 

@@ -19,9 +19,9 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 1.1 | 项目结构分析 | ✅ 完成 | `learn/01-overview.md` (255 行) | 2h |
-| 1.2 | crate 依赖关系梳理 | ✅ 完成 | `learn/02-architecture.md` (485 行) | 2h |
-| 1.3 | Rust 异步机制在 Embassy 的应用 | ✅ 完成 | `learn/03-async-fundamentals.md` (571 行) | 3h |
+| 1.1 | 项目结构分析 | ✅ 完成 | `docs/01-overview.md` (255 行) | 2h |
+| 1.2 | crate 依赖关系梳理 | ✅ 完成 | `docs/02-architecture.md` (485 行) | 2h |
+| 1.3 | Rust 异步机制在 Embassy 的应用 | ✅ 完成 | `docs/03-async-fundamentals.md` (571 行) | 3h |
 
 **验收标准**：
 - [x] ~~能画出 crate 依赖关系图~~（本篇 4. 节 Mermaid 拓扑图）
@@ -36,10 +36,10 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 2.1 | embassy-executor 源码分析 | ✅ 完成 | `learn/04-executor.md` (585 行) | 4h |
-| 2.2 | embassy-time 源码分析 | ✅ 完成 | `learn/05-time.md` (690 行) | 2h |
-| 2.3 | embassy-sync 源码分析 | ✅ 完成 | `learn/06-sync.md` (729 行) | 2h |
-| 2.4 | embassy-futures 源码分析 | ✅ 完成 | `learn/07-futures.md` (585 行) | 1h |
+| 2.1 | embassy-executor 源码分析 | ✅ 完成 | `docs/04-executor.md` (585 行) | 4h |
+| 2.2 | embassy-time 源码分析 | ✅ 完成 | `docs/05-time.md` (690 行) | 2h |
+| 2.3 | embassy-sync 源码分析 | ✅ 完成 | `docs/06-sync.md` (729 行) | 2h |
+| 2.4 | embassy-futures 源码分析 | ✅ 完成 | `docs/07-futures.md` (585 行) | 1h |
 
 **验收标准**：
 - [x] ~~能解释任务调度流程~~（M2.1 `04-executor.md` §3 主循环 + §4 6 转移状态机）
@@ -72,11 +72,11 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 4.1 | GPIO 与中断机制 | 待办 | `learn/12-gpio.md` | 2h |
-| 4.2 | UART 串口通信 | 待办 | `learn/13-uart.md` | 2h |
-| 4.3 | SPI 总线通信 | 待办 | `learn/14-spi.md` | 2h |
-| 4.4 | I2C 总线通信 | 待办 | `learn/15-i2c.md` | 2h |
-| 4.5 | 硬件定时器与 PWM | 待办 | `learn/16-timer.md` | 2h |
+| 4.1 | GPIO 与中断机制 | 待办 | `docs/12-gpio.md` | 2h |
+| 4.2 | UART 串口通信 | 待办 | `docs/13-uart.md` | 2h |
+| 4.3 | SPI 总线通信 | 待办 | `docs/14-spi.md` | 2h |
+| 4.4 | I2C 总线通信 | 待办 | `docs/15-i2c.md` | 2h |
+| 4.5 | 硬件定时器与 PWM | 待办 | `docs/16-timer.md` | 2h |
 
 **验收标准**：
 - [ ] 能解释外设驱动的异步封装原理
@@ -91,10 +91,10 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 5.1 | embassy-net 网络栈分析 | 待办 | `learn/17-net.md` | 4h |
-| 5.2 | embassy-usb 设备栈分析 | 待办 | `learn/18-usb.md` | 3h |
-| 5.3 | 蓝牙低功耗支持分析 | 待办 | `learn/19-ble.md` | 3h |
-| 5.4 | LoRa 远程通信分析 | 待办 | `learn/20-lora.md` | 2h |
+| 5.1 | embassy-net 网络栈分析 | 待办 | `docs/17-net.md` | 4h |
+| 5.2 | embassy-usb 设备栈分析 | 待办 | `docs/18-usb.md` | 3h |
+| 5.3 | 蓝牙低功耗支持分析 | 待办 | `docs/19-ble.md` | 3h |
+| 5.4 | LoRa 远程通信分析 | 待办 | `docs/20-lora.md` | 2h |
 
 **验收标准**：
 - [ ] 能解释 smoltcp 的集成方式
@@ -109,9 +109,9 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 6.1 | embassy-boot 启动引导分析 | 待办 | `learn/21-boot.md` | 3h |
-| 6.2 | 固件升级与 DFU 机制 | 待办 | `learn/22-dfu.md` | 2h |
-| 6.3 | 低功耗设计模式 | 待办 | `learn/23-low-power.md` | 2h |
+| 6.1 | embassy-boot 启动引导分析 | 待办 | `docs/21-boot.md` | 3h |
+| 6.2 | 固件升级与 DFU 机制 | 待办 | `docs/22-dfu.md` | 2h |
+| 6.3 | 低功耗设计模式 | 待办 | `docs/23-low-power.md` | 2h |
 
 **验收标准**：
 - [ ] 能解释分区布局和验证机制
@@ -126,10 +126,10 @@
 
 | 序号 | 任务 | 状态 | 产出 | 预计工时 |
 |------|------|------|------|----------|
-| 7.1 | 开发环境配置指南 | 待办 | `learn/24-dev-setup.md` | 2h |
-| 7.2 | 调试与日志最佳实践 | 待办 | `learn/25-debugging.md` | 2h |
-| 7.3 | 测试策略与方法 | 待办 | `learn/26-testing.md` | 2h |
-| 7.4 | 常见设计模式总结 | 待办 | `learn/27-patterns.md` | 3h |
+| 7.1 | 开发环境配置指南 | 待办 | `docs/24-dev-setup.md` | 2h |
+| 7.2 | 调试与日志最佳实践 | 待办 | `docs/25-debugging.md` | 2h |
+| 7.3 | 测试策略与方法 | 待办 | `docs/26-testing.md` | 2h |
+| 7.4 | 常见设计模式总结 | 待办 | `docs/27-patterns.md` | 3h |
 
 **验收标准**：
 - [ ] 能配置完整的开发环境
@@ -202,13 +202,13 @@
 | 2026-06-04 | CodeGraph 索引初始化 | ✅ 完成 |
 | 2026-06-04 | CLAUDE.md 生成 | ✅ 完成 |
 | 2026-06-04 | 学习文档体系规划 | ✅ 完成 |
-| 2026-06-05 | M1.1 `learn/01-overview.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M1.2 `learn/02-architecture.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M1.3 `learn/03-async-fundamentals.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M2.1 `learn/04-executor.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M2.2 `learn/05-time.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M2.3 `learn/06-sync.md` 撰写完成 | ✅ 完成 |
-| 2026-06-05 | M2.4 `learn/07-futures.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M1.1 `docs/01-overview.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M1.2 `docs/02-architecture.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M1.3 `docs/03-async-fundamentals.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M2.1 `docs/04-executor.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M2.2 `docs/05-time.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M2.3 `docs/06-sync.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | M2.4 `docs/07-futures.md` 撰写完成 | ✅ 完成 |
 | 2026-06-05 | GitHub Pages 文档站搭建(MkDocs Material,旁支基础设施) | ✅ 完成 |
 | 2026-06-05 | M3 架构 ADR-004(术语+章节模板+对比维度+CodeGraph 入口) | (已完成) |
 | 2026-06-05 | M3.1 `docs/08-hal-architecture.md` 撰写完成(727 行,9 节,3 图,20 处源码引用) | (已完成) |

@@ -394,8 +394,8 @@ critical_section::with(|cs| {
 ```
 
 在 wake 路径中：
-- ❌ **不能**在临界区里调用 `waker.wake()` —— 可能嵌套临界区/死锁
-- ✅ **应该**用原子状态机 + 后置 wake（参考上面的 4 状态机）
+- **不能**在临界区里调用 `waker.wake()` —— 可能嵌套临界区/死锁
+- **应该**用原子状态机 + 后置 wake（参考上面的 4 状态机）
 
 ### 6.3 `yield_now` 的实现与代价
 
@@ -433,9 +433,9 @@ while !some_condition() {
 ```
 
 **代价（必须警惕）**：
-- ⚠️ **busy-loop**：每次 `yield_now().await` 都会让出，但下次 poll 立即返回（除非被其他任务抢占），**100% CPU**
-- ✅ 适合轮询简单条件（几微秒内变化）
-- ❌ 适合需要等待**毫秒级以上**事件的场景 —— 用 `Timer::after()` 替代
+- 注:**busy-loop**：每次 `yield_now().await` 都会让出，但下次 poll 立即返回（除非被其他任务抢占），**100% CPU**
+- 适合轮询简单条件（几微秒内变化）
+- 适合需要等待**毫秒级以上**事件的场景 —— 用 `Timer::after()` 替代
 
 ### 6.4 `select!` 的工作原理
 
@@ -549,18 +549,18 @@ embassy-executor-macros/src/macros/task.rs   (#[task] 宏展开)
 ```
 
 **下一步推荐路径**：
-- **M2.1 立即进入**：`learn/04-executor.md`（任务调度原理）—— 把本文的 `poll` 函数展开
-- **M2.2 同步视角**：`learn/05-time.md`（`Timer` 内部）—— 了解时间驱动注入
-- **M2.3 通信视角**：`learn/06-sync.md`（Channel/Signal）—— 跨任务协作
+- **M2.1 立即进入**：`docs/04-executor.md`（任务调度原理）—— 把本文的 `poll` 函数展开
+- **M2.2 同步视角**：`docs/05-time.md`（`Timer` 内部）—— 了解时间驱动注入
+- **M2.3 通信视角**：`docs/06-sync.md`（Channel/Signal）—— 跨任务协作
 
 ---
 
 ## 11. 参考
 
 - **本仓库**：
-  - `learn/01-overview.md` · `learn/02-architecture.md`
-  - `learn/04-executor.md`（M2.1，紧接本篇）
-  - `learn/05-time.md` · `learn/06-sync.md` · `learn/07-futures.md`
+  - `docs/01-overview.md` · `docs/02-architecture.md`
+  - `docs/04-executor.md`（M2.1，紧接本篇）
+  - `docs/05-time.md` · `docs/06-sync.md` · `docs/07-futures.md`
 - **官方**：
   - [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) — std async 圣经
   - [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) — Waker 文档

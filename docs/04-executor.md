@@ -572,9 +572,9 @@ fn my_pender(_ctx: *mut ()) {
 ## 12. 参考
 
 - **本仓库**：
-  - `learn/01-overview.md` · `learn/02-architecture.md` · `learn/03-async-fundamentals.md`
-  - `learn/05-time.md`（M2.2，紧接）—— 深入 `Timer::after` 怎么用 executor
-  - `learn/06-sync.md`（M2.3）—— Channel/Signal 怎么跨任务通信
+  - `docs/01-overview.md` · `docs/02-architecture.md` · `docs/03-async-fundamentals.md`
+  - `docs/05-time.md`（M2.2，紧接）—— 深入 `Timer::after` 怎么用 executor
+  - `docs/06-sync.md`（M2.3）—— Channel/Signal 怎么跨任务通信
 - **官方**：
   - [embassy-rs/embassy](https://github.com/embassy-rs/embassy/tree/main/embassy-executor) — 源码
   - [docs.embassy.dev/embassy-executor](https://docs.embassy.dev/embassy-executor/) — API 文档

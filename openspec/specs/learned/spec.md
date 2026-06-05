@@ -90,11 +90,11 @@ Aborted with 1 warnings in strict mode!
 **解决**:用 `exclude_docs`(MkDocs 1.5+),build 阶段就剔除文件:
 
 ```yaml
-# ❌ 错误:仍会 build,只是不进导航
+# 错误:仍会 build,只是不进导航
 not_in_nav: |
   /README.md
 
-# ✅ 正确:build 阶段就跳过,不读不渲染
+# 正确:build 阶段就跳过,不读不渲染
 exclude_docs: |
   README.md
 ```
@@ -272,7 +272,7 @@ ST 官方 SVD
 | 代码复制按钮 | `features: content.code.copy` 一行 |
 | 排除文件 | `not_in_nav: \|\n  /README.md`(避免 README.md 和 index.md 双首页冲突) |
 
-**GitHub Pages 部署模式选择(★ 易踩坑)**:
+**GitHub Pages 部署模式选择(易踩坑)**:
 
 ```
 错误:Settings → Pages → Source = "Deploy from a branch" + main/docs

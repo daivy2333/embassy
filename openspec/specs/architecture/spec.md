@@ -141,12 +141,12 @@ HAL 层实现 MUST 保持跨平台兼容性。
 
 | crate | stm32 | nrf | rp |
 |-------|-------|-----|-----|
-| `embedded-hal-02` | ✓ | ✓ | ✓ |
-| `embedded-hal-1` | ✓ | ✓ | ✓ |
-| `embedded-hal-async` | ✓ | ✓ | ✓ |
-| `embedded-hal-nb` | ✓ | ✗ | ✓ |
+| `embedded-hal-02` | 是 | 是 | 是 |
+| `embedded-hal-1` | 是 | 是 | 是 |
+| `embedded-hal-async` | 是 | 是 | 是 |
+| `embedded-hal-nb` | 是 | 否 | 是 |
 | `prio-bits-N`(NVIC 优先级位) | 4(16 级) | 3(8 级) | 2(4 级) |
-| `aligned` feature(DMA 对齐) | ✓ | ✗ | ✗ |
+| `aligned` feature(DMA 对齐) | 是 | 否 | 否 |
 
 #### 5. CodeGraph 入口清单(M3.1~3.4 复用,避免重复探索)
 
