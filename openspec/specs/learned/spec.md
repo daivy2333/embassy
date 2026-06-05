@@ -310,3 +310,116 @@ ST 官方 SVD
 | `embassy-usb/src/` | USB 栈 |
 | `examples/` | 示例代码 |
 | `tests/` | 集成测试 |
+| `embassy-stm32/src/gpio.rs` | stm32 GPIO 主入口(Input/Output/Flex) |
+| `embassy-stm32/src/exti/mod.rs` | stm32 EXTI 异步 waker 实现 |
+| `embassy-nrf/src/gpio.rs` | nrf GPIO 主入口 |
+| `embassy-nrf/src/gpiote.rs` | nrf GPIOTE channel 池 + `wait_internal` debloat 优化 |
+| `embassy-rp/src/gpio.rs` | rp GPIO 主入口 + Flex 完整实现 + `InputFuture` |
+| `embassy-mspm0/src/gpio.rs` | mspm0 GPIO + `wait_inner` 关键区 + `WaitMap` 模式 |
+| `embassy-mcxa/src/gpio.rs` | mcxa `Flex<'d, M>` 编译期 Mode + `PORT_WAIT_MAPS` |
+| `embassy-imxrt/src/gpio.rs` | imxrt `InputFuture::new` 多寄存器配置 |
+
+## GPIO 异步 waker 三平台实现速查(2026-06-05)
+
+| 平台 | Waker 容器 | 入口 | 关键 trait |
+|------|-----------|------|-----------|
+| stm32 | `AtomicWaker[]` | `embassy-stm32/src/exti/mod.rs:179-188` | `ExtiInputFuture::new` |
+| nrf | channel event subscriber | `embassy-nrf/src/gpiote.rs:369-382` | `wait_internal` + `-> impl Future` debloat |
+| rp | `AtomicWaker[]` | `embassy-rp/src/gpio.rs:812-816` | `InputFuture::new` |
+| mspm0 | `WaitMap` 全局 | `embassy-mspm0/src/gpio.rs:336-382` | `wait_inner` + closure 二次检查 |
+| mcxa | `WaitMap[]` 按 port | `embassy-mcxa/src/gpio.rs:755-787` | `PORT_WAIT_MAPS[port].wait(pin)` |
+| imxrt | `AtomicWaker[]` | `embassy-imxrt/src/gpio.rs:410-437` | `InputFuture::new` 多寄存器 |
+
+**关键设计要点**:
+- 通用状态机:waker 注册 → 关键区保护 → 配置触发条件 → 使能中断 → ISR 触发 → wake
+- **waker 注册必须在中断使能之前**(否则丢失唤醒)
+- **重新检查电平**必须在 wake 之后(防止边沿丢失)
+- "Debloat 优化"(`-> impl Future` 替代 `async fn`):见 [tweedegolf 博客](https://tweedegolf.nl/en/blog/235/debloat-your-async-rust)
+- 详细分析见 `docs/12-gpio.md` §6
+
+## GPIO 中断资源对照(2026-06-05)
+
+| 平台 | 独立中断 GPIO 数 | NVIC 数 | 共享限制 | 超低功耗 |
+|------|-----------------|---------|----------|----------|
+| stm32 | 16(EXTI line) | 16+1 | PA0/PB0/PC0... 共享 EXTI0 | STOP 模式 + EXTI 唤醒 |
+| nrf | 8(GPIOTE channel) | 1 | channel 池申请/释放 | System OFF + LATCH + RAM retention |
+| rp | 30/48(全 pin) | 1 | 无 | DORMANT + `DormantWake` |
+| mspm0 | 32/port(全 pin) | 1/port | 无 | STOP 模式 + GPIO 唤醒 |
+| mcxa | 32/port(全 pin) | 1/port | 无 | VLPS 模式 + GPIO 唤醒 |
+| imxrt | 全 pin(3 类 INT) | 3 | GPIO INT A/B/C | STOP 模式 + GPIO 唤醒 |
+
+**选型建议**:多按键场景优先 rp/mcxa/mspm0/imxrt;超低功耗唤醒优先 nrf;DMA 联动仅 imxrt;详细见 `docs/12-gpio.md` §7.8
+
+## UART 异步收发跨平台对照(2026-06-05)
+
+| 平台 | `Uart` struct 入口 | 硬件路径 | DMA | `embedded-io-async` | 单次最大 |
+|------|-------------------|----------|-----|---------------------|----------|
+| stm32 | `embassy-stm32/src/usart/{v1,v2,v3,v4}/mod.rs` | USART 多版本 | 外部 DMA1/2/BDMA/GPDMA | 是 | 无(由 DMA 通道决定) |
+| nrf | `embassy-nrf/src/uarte.rs:139-142` | UARTE + EasyDMA | 内置 | 是 | 256-1024B(EASY_DMA_SIZE) |
+| rp | `embassy-rp/src/uart/mod.rs:147` | UART + 32B FIFO | 外部 DREQ | 是 | 无 |
+| imxrt | `embassy-imxrt/src/flexcomm/uart.rs:40` | flexcomm UART | 外部 + flexcomm DMA | 是 | 无 |
+| microchip | `embassy-microchip/src/uart.rs:407` | UART | 外部 | 是 | 无 |
+| mspm0 | `embassy-mspm0/src/uart/mod.rs:196` | UART(带 buffer)| 外部 | 是 | 无 |
+
+**关键观察**:
+- **nrf 的 UARTE 内置 EasyDMA**——单次传输 ≤ 256B(nRF52840)/ 1024B(nRF54L),超过会立即 `Err(BufferTooLong)`
+- **stm32 多版本历史包袱**——v1/v2/v3/v4 寄存器差异靠 `#[cfg(usart_v1)]` 等 cfg 屏蔽
+- **rp BufferedUart 的 user buffer** 必须是 `&'static mut [u8]`,不能栈分配
+- **nrf `split_with_idle`** 通过 PPI + TIMER 实现硬件级"line idle"超时——Modbus RTU 必备
+- 详细分析见 `docs/13-uart.md` §5-7
+
+## SPI 跨平台对照(2026-06-05)
+
+| 平台 | `Spi` struct 入口 | 硬件路径 | dual-DMA | EASY_DMA 限制 | `Phase`+`Polarity` vs `Mode` |
+|------|-------------------|----------|----------|----------------|------------------------------|
+| stm32 | `embassy-stm32/src/spi/{v1,v2,v3}/mod.rs` | SPI 多版本 | 是(需 2 ch) | 否 | `Mode {0,1,2,3}` |
+| nrf | `embassy-nrf/src/spim.rs:206` | SPIM + EasyDMA | 是(内置) | 256/1024B | `Mode {0,1,2,3}` |
+| rp(普通) | `embassy-rp/src/spi.rs` | SPI + 8B FIFO | 是(需 2 ch) | 否 | `Phase` + `Polarity` |
+| rp(PIO) | `embassy-rp/src/pio_programs/spi.rs:90` | PIO 状态机 | 是(需 2 ch) | 否 | `Phase` + `Polarity` |
+| mcxa | `embassy-mcxa/src/spi/controller.rs:132` | LPSPI + 16-32B FIFO | 是(需 2 ch) | 否 | `Polarity` + `Phase` |
+| mspm0 | `embassy-mspm0/src/spi/` | SPI | 是(需 2 ch) | 否 | `Mode` |
+
+**关键观察**:
+- **`SetConfig` trait**(`embassy-embedded-hal/src/lib.rs:21-30`)是 SPI / I2C / UART 共享的运行时配置切换
+- **rp PIO SPI** 唯一可"任意 GPIO 模拟"——适合非标准引脚或多 SPI 总线
+- **nrf SPIM EASY_DMA_SIZE 限制**——单次 transfer 不能超过 256/1024 字节
+- **`SpiBus` + `SpiDevice`** 抽象实现多设备共享总线 + 自动 CS 控制
+- 详细分析见 `docs/14-spi.md` §5-7
+
+## I2C 跨平台对照(2026-06-05)
+
+| 平台 | `I2c` struct 入口 | 硬件路径 | DMA | 时钟拉伸 | 仲裁 | Slave |
+|------|-------------------|----------|-----|----------|------|-------|
+| stm32 | `embassy-stm32/src/i2c/mod.rs:130`(`I2c<'d, M, IM>`)| I2C v1/v2(双中断)| 外部 DMA1/2 | 中(双中断) | 完整(SS) | 是 |
+| nrf | `embassy-nrf/src/twim.rs:115-120`(`Twim<'d>`)| TWIM + EasyDMA | 内置 | 优(自动 `suspended`) | 是(`error` 事件) | TWIS |
+| rp | `embassy-rp/src/i2c.rs` | I2C block + PIO 状态机 | 否(block) | 弱(轮询) | 是 | 否 |
+| mspm0 | `embassy-mspm0/src/i2c/` | I2C | 外部 | 中 | 部分 | 部分 |
+| mcxa | `embassy-mcxa/src/i2c/` | LPSPI | 外部 | 中 | 部分 | 部分 |
+
+**关键观察**:
+- **stm32 I2C v1 vs v2 差异**:`on_interrupt` 在 v1 = L31,v2 = L72(寄存器命名不同)
+- **nrf `tx_ram_buffer` 必须 `&'d mut`**——EasyDMA 只能 RAM
+- **nrf 时钟拉伸 3 事件**:`events_suspended`(拉伸)/ `events_stopped`(完成)/ `events_error`(NACK/仲裁)
+- **rp I2C block 模式无 DMA**——纯软件 + PIO 状态机,CPU 占用高
+- **stm32 唯一支持多主机从**——其他平台无此能力
+- 详细分析见 `docs/15-i2c.md` §5-7
+
+## Timer/PWM 跨平台对照(2026-06-05)
+
+| 平台 | `Pwm` struct 入口 | 频率范围 | 占空比精度 | 中心对齐 | 死区 |
+|------|-------------------|----------|-----------|----------|------|
+| stm32 | `embassy-stm32/src/timer/{pwm,simple_pwm}.rs` | 1 Hz - MHz | u16 | 部分 | 是(高级 TIM)|
+| stm32 | `embassy-stm32/src/hrtim/fullbridge.rs:9` | ns 级 | u16 | 是 | 是(HRTIM)|
+| nrf | `embassy-nrf/src/pwm.rs`(`PwmSequence`)| 16 Hz - 500 kHz | u16 | 否 | 否 |
+| rp | `embassy-rp/src/pwm.rs`(Slice + PIO 双方案)| 1 Hz - MHz | u8(0.39%) | 是 | 否 |
+| microchip | `embassy-microchip/src/pwm.rs:72` | 100 k - 48 M | u16(0.01%)| 否 | 否 |
+| lpc55 | `embassy-nxp/src/pwm/lpc55.rs:69`(SCT)| 96 M / 256 | u32 | 是(`phase_correct`)| 否 |
+| mcxa | `embassy-mcxa/src/ctimer/pwm.rs:58` | 由 clock config | u16 | 部分 | 否 |
+
+**关键观察**:
+- **stm32 最复杂**——通用 / 高级 / 基本 / HRTIM 四类 timer
+- **PWM 输出是同步操作**——`set_duty` 不需要 waker
+- **Counter::wait 是典型 waker 应用**——同 M4.1 §6 GPIO `wait_for_xxx` 模式
+- **rp 精度最低**(`u8`)——但 LED 调光够用
+- **microchip 精度最高**(`0.01%`)——适合电源管理
+- 详细分析见 `docs/16-timer.md` §5-7

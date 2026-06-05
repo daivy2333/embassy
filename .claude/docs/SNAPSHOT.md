@@ -88,7 +88,7 @@ embassy/                              # fork 自 embassy-rs/embassy
 |------|-----|
 | 当前分支 | main |
 | 最近提交 | 271d25a1d chore(docs): M3 收官 + mkdocs.yml nav 加入 M3 全 4 篇 + 状态同步 |
-| 工作区状态 | OPT-001 emoji 清理 + 文档体系更新(本轮)待 commit |
+| 工作区状态 | 干净(最近 commit c83476a11 全项目文档批量更新) |
 | 远端同步 | 上轮 8 commits 已 push(M3.1-3.4 + ADR-004 + CLAUDE.md 规则) |
 
 ---
@@ -114,15 +114,14 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M2 收官(完成 4/4)+ **M3 收官(完成 4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** + ADR-004 入档 + GitHub Pages 文档站搭建完成
+**当前阶段**：M2 收官(完成 4/4)+ **M3 收官(完成 4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** + **M4 收官(完成 5/5 — GPIO + UART + SPI + I2C + Timer)** + ADR-004 入档 + GitHub Pages 文档站搭建完成
 
 **下一步**：
-1. push 触发 GitHub Pages 部署(commit/push 由用户决定时机)
-2. M3 全 4 篇待加入 mkdocs.yml nav(目前 nav 只到 M2)
-3. 启动 M4 外设驱动系列(`docs/12-gpio.md` 起,5 篇)
-4. 或 OPT-001 历史 emoji 清理(30-45min,顺手清规范一致性)
+1. M4 5 篇全完成,准备一次性 commit(5 docs + 5 plans + 同步文件)
+2. push 触发 GitHub Pages 部署(由用户决定时机)
+3. 启动 M5 网络与通信栈(`docs/17-net.md` 起)
 
-**进度**：11/27 学习任务完成(41%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · CLAUDE.md +1 新规则(禁用 emoji)
+**进度**：16/27 学习任务完成(59%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5 外设驱动收官)** · CLAUDE.md +1 新规则(禁用 emoji)
 
 ---
 
