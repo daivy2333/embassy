@@ -42,9 +42,9 @@
 | 2.4 | embassy-futures 源码分析 | ✅ 完成 | `learn/07-futures.md` (585 行) | 1h |
 
 **验收标准**：
-- [ ] 能解释任务调度流程
-- [ ] 能说明定时器队列实现
-- [ ] 能描述 Channel/Signal/Mutex 的使用场景
+- [x] ~~能解释任务调度流程~~（M2.1 `04-executor.md` §3 主循环 + §4 6 转移状态机）
+- [x] ~~能说明定时器队列实现~~（M2.2 `05-time.md` §6 integrated vs generic + §9 12 步 wake 链）
+- [x] ~~能描述 Channel/Signal/Mutex 的使用场景~~（M2.3 `06-sync.md` §10 对比表+决策树 + §11 5 个实战模式）
 
 ---
 
