@@ -87,9 +87,9 @@ embassy/                              # fork 自 embassy-rs/embassy
 | 属性 | 值 |
 |------|-----|
 | 当前分支 | main |
-| 最近提交 | a935af221 docs(M4): 5 篇外设驱动(GPIO + UART + SPI + I2C + Timer,合计 4988 行) |
+| 最近提交 | 97bfd4a55 docs(M5): 4 篇网络与通信文档(embassy-net + embassy-usb + BLE + LoRa,合计 5124 行) |
 | 工作区状态 | 干净(仅 `.codegraph/daemon.pid` 被 git 标记 D,索引健康 46966 节点) |
-| 远端同步 | M4 commit (a935af221) 未 push,待用户决定时机 |
+| 远端同步 | 2 个 commit 未 push(59a19a162 M4 收官同步 + 97bfd4a55 M5 文档),待用户决定时机 |
 
 ---
 
@@ -114,15 +114,15 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M1 100% · M2 100% · M3 100% · **M4 100%(5/5 外设驱动收官)** · **M5 100%(4/4 网络与通信收官 — docs/17-20 全部完成,5124 行)** · OpenSpec change `add-m5-network-comms-docs` 待归档
+**当前阶段**：M1 100% · M2 100% · M3 100% · M4 100% · M5 100% · **M6 100%(3/3 系统组件收官 — docs/21-23 全部完成,合计 3612 行;OpenSpec change `add-m6-system-components-docs` 待归档)** · **M7 待启动(dev-setup / debugging / testing / patterns)**
 
 **下一步**：
-1. 更新 SNAPSHOT.md + tasks.md 反映 M5 收官(本轮)
-2. commit M5 4 篇 + mkdocs.yml + SNAPSHOT/tasks 同步
-3. /opsx:archive add-m5-network-comms-docs
-4. push 后自动触发 GitHub Pages 部署
+1. 统一 commit M6(docs/21-23 + mkdocs.yml + openspec/changes/add-m6-* + .claude/docs/{SNAPSHOT,tasks}.md)
+2. /opsx:archive add-m6-system-components-docs
+3. push 全部待发 commit(M4 收官 + M5 + M6)到远端,触发 GitHub Pages 部署 M3-M6 全 16 篇
+4. /opsx:propose 启动 M7 开发实践(预计 9h)
 
-**进度**：16/27 学习任务完成(59%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5 外设驱动收官)** · CLAUDE.md +1 新规则(禁用 emoji)
+**进度**：23/27 学习任务完成(85%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5)** · **M5 100%(完成,4/4 网络与通信收官)** · **M6 100%(完成,3/3 系统组件收官)** · CLAUDE.md +1 新规则(禁用 emoji)
 
 ---
 
@@ -137,4 +137,4 @@ embassy/                              # fork 自 embassy-rs/embassy
 | Optimization spec | (已创建,OPT-001 已完成) | `openspec/specs/optimization/spec.md` |
 | CLAUDE.md | (已创建 + 文档撰写规范已加) | `CLAUDE.md` |
 | CodeGraph 索引 | (健康,46966 节点 / 1953 Rust 文件)| `.codegraph/` |
-| GitHub Pages 站 | (M3 全 4 篇已加入 nav;M4 5 篇待追加后才能 build/push) | `mkdocs.yml` + `.github/workflows/docs.yml` |
+| GitHub Pages 站 | (M1-M6 全 19 篇已加入 nav,待 push 2+1 commits 后自动 build/deploy) | `mkdocs.yml` + `.github/workflows/docs.yml` |
