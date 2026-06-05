@@ -1,29 +1,133 @@
-# embassy docs
+# Embassy 学习文档体系
 
-The documentation hosted at [https://embassy.dev/book](https://embassy.dev/book). Building the documentation requires the [asciidoctor](https://asciidoctor.org/) tool, and can built running `make` in this folder:
+> 本文档库用于系统学习 Embassy 嵌入式异步框架
+> 每篇文档学术精简、信息完备、职责单一
+
+---
+
+## 文档目录
+
+### 基础架构
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 01 | `01-overview.md` | 项目概述与设计理念 | 待创建 |
+| 02 | `02-architecture.md` | crate 架构与依赖关系 | 待创建 |
+| 03 | `03-async-fundamentals.md` | Rust 异步基础与 Embassy 适配 | 待创建 |
+
+### 核心组件
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 04 | `04-executor.md` | embassy-executor 任务调度 | 待创建 |
+| 05 | `05-time.md` | embassy-time 定时器与时间管理 | 待创建 |
+| 06 | `06-sync.md` | embassy-sync 同步原语 | 待创建 |
+| 07 | `07-futures.md` | embassy-futures 异步工具 | 待创建 |
+
+### 硬件抽象
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 08 | `08-hal-architecture.md` | HAL 层设计与 embedded-hal trait | 待创建 |
+| 09 | `09-stm32.md` | embassy-stm32 平台详解 | 待创建 |
+| 10 | `10-nrf.md` | embassy-nrf 平台详解 | 待创建 |
+| 11 | `11-rp.md` | embassy-rp 平台详解 | 待创建 |
+
+### 外设与协议
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 12 | `12-gpio.md` | GPIO 输入输出与中断 | 待创建 |
+| 13 | `13-uart.md` | UART 串口通信 | 待创建 |
+| 14 | `14-spi.md` | SPI 总线通信 | 待创建 |
+| 15 | `15-i2c.md` | I2C 总线通信 | 待创建 |
+| 16 | `16-timer.md` | 硬件定时器与 PWM | 待创建 |
+
+### 网络与通信
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 17 | `17-net.md` | embassy-net 网络栈 | 待创建 |
+| 18 | `18-usb.md` | embassy-usb 设备栈 | 待创建 |
+| 19 | `19-ble.md` | 蓝牙低功耗支持 | 待创建 |
+| 20 | `20-lora.md` | LoRa 远程通信 | 待创建 |
+
+### 系统组件
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 21 | `21-boot.md` | embassy-boot 启动引导 | 待创建 |
+| 22 | `22-dfu.md` | 固件升级与 DFU | 待创建 |
+| 23 | `23-low-power.md` | 低功耗设计模式 | 待创建 |
+
+### 开发实践
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| 24 | `24-dev-setup.md` | 开发环境配置 | 待创建 |
+| 25 | `25-debugging.md` | 调试与日志（defmt/probe-rs） | 待创建 |
+| 26 | `26-testing.md` | 测试策略与方法 | 待创建 |
+| 27 | `27-patterns.md` | 常见设计模式 | 待创建 |
+
+### 附录
+
+| 序号 | 文档 | 内容 | 状态 |
+|------|------|------|------|
+| A | `appendix-a-glossary.md` | 术语表 | 待创建 |
+| B | `appendix-b-references.md` | 参考资料汇总 | 待创建 |
+| C | `appendix-c-examples.md` | 代码示例索引 | 待创建 |
+
+---
+
+## 文档规范
+
+### 格式要求
+
+1. **标题层级**：最多 3 级（H1 → H2 → H3）
+2. **代码块**：必须标注语言（```rust）
+3. **表格**：用于结构化对比
+4. **图表**：复杂流程使用 Mermaid 图
+
+### 内容要求
+
+1. **学术精简**：避免冗余，直击要点
+2. **信息完备**：单篇文档自成体系
+3. **职责单一**：一篇文档只讲一个主题
+4. **可验证**：代码示例必须可编译
+
+### 命名规范
 
 ```
-make
+{序号}-{模块名}.md
+示例：04-executor.md、12-gpio.md
 ```
 
-Then open the generated file `thebook/index.html`.
+---
 
-## License
+## 阅读建议
 
-The Embassy Docs (this folder) is distributed under the following licenses:
+### 入门路径
 
-* The code samples and free-standing Cargo projects contained within these docs are licensed under the terms of both the [MIT License] and the [Apache License v2.0].
-* The written prose contained within these docs are licensed under the terms of the Creative Commons [CC-BY-SA v4.0] license.
+```
+01-overview → 03-async-fundamentals → 04-executor → 12-gpio → 24-dev-setup
+```
 
-Copies of the licenses used by this project may also be found here:
+### 深入路径
 
-* [MIT License Hosted]
-* [Apache License v2.0 Hosted]
-* [CC-BY-SA v4.0 Hosted]
+```
+02-architecture → 08-hal-architecture → 09/10/11 (选择平台) → 对应外设文档
+```
 
-[MIT License]: ./../LICENSE-MIT
-[Apache License v2.0]: ./../LICENSE-APACHE
-[CC-BY-SA v4.0]: ./../LICENSE-CC-BY-SA
-[MIT License Hosted]: https://opensource.org/licenses/MIT
-[Apache License v2.0 Hosted]: http://www.apache.org/licenses/LICENSE-2.0
-[CC-BY-SA v4.0 Hosted]: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+### 参考查阅
+
+```
+按需查阅：appendix-b-references → 具体模块文档
+```
+
+---
+
+## 文档维护
+
+- 源码更新时，同步更新对应文档
+- 新增功能时，创建或更新对应文档
+- 废弃功能时，标记为 deprecated 并说明替代方案
