@@ -142,9 +142,9 @@
 
 | 序号 | 文档 | 状态 | 说明 |
 |------|------|------|------|
-| A | `appendix-a-glossary.md` | 待办 | 术语表 |
-| B | `appendix-b-references.md` | 待办 | 参考资料汇总 |
-| C | `appendix-c-examples.md` | 待办 | 代码示例索引 |
+| A | `appendix-a-glossary.md` | (已完成) | 术语表(282 行 121 术语 A-Z 索引) |
+| B | `appendix-b-references.md` | (已完成) | 参考资料汇总(336 行 38 URL 5 大类) |
+| C | `appendix-c-examples.md` | (已完成) | 代码示例索引(743 行 108 bin 16 主题) |
 
 ---
 
@@ -159,7 +159,8 @@
 | M5 网络通信 | 4 | 4 | 100% (已完成) |
 | M6 系统组件 | 3 | 3 | 100% (已完成) |
 | M7 开发实践 | 4 | 4 | 100% (已完成) |
-| **总计** | **27** | **27** | **100% 收官** |
+| 附录 A/B/C | 3 | 3 | 100% (已完成) |
+| **总计** | **30** | **30** | **100% 收官(27 主 + 3 附录)** |
 
 ---
 
@@ -242,3 +243,9 @@
 | 2026-06-05 | M7.4 `docs/27-patterns.md` 撰写完成(1204 行 12 节 2 Mermaid 48 引用,0 emoji) | (已完成) |
 | 2026-06-05 | mkdocs.yml nav 加入 M7 全 4 篇(24-27) | (已完成) |
 | 2026-06-05 | **Embassy 学习项目 M1-M7 收官**(27/27 = 100%,合计 ~31000 行) | (已完成) |
+| 2026-06-05 | M8 启动:OpenSpec change `add-m8-appendices` 创建(proposal + design + 3 spec + tasks) | (已完成) |
+| 2026-06-05 | M8.A `docs/appendix-a-glossary.md` 撰写完成(282 行 121 术语 A-Z 索引,0 emoji) | (已完成) |
+| 2026-06-05 | M8.B `docs/appendix-b-references.md` 撰写完成(336 行 38 URL 5 大类,0 emoji) | (已完成) |
+| 2026-06-05 | M8.C `docs/appendix-c-examples.md` 撰写完成(743 行 108 bin 引用 16 主题,0 emoji) | (已完成) |
+| 2026-06-05 | mkdocs.yml nav 加入附录 A/B/C | (已完成) |
+| 2026-06-05 | **Embassy 学习项目 M1-M8 最终收官**(30/30 = 100%,合计 ~26000 行) | (已完成) |

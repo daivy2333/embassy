@@ -87,9 +87,9 @@ embassy/                              # fork 自 embassy-rs/embassy
 | 属性 | 值 |
 |------|-----|
 | 当前分支 | main |
-| 最近提交 | cdc25b1b8 docs(M7.4): docs/27-patterns.md 常见设计模式总结(综合 12 节 2 Mermaid ~1204 行) |
-| 工作区状态 | M7 收官同步中(.claude/docs/{SNAPSHOT,tasks}.md 已更新) |
-| 远端同步 | 8 个 commit 未 push(59a19a162 M4 收官 + 97bfd4a55 M5 docs + M6 docs + M6 archive + M7.1-4 docs),待用户决定时机 |
+| 最近提交 | 39db49875 docs(M8.C): docs/appendix-c-examples.md 示例索引(~743 行 108 bin 引用 16 主题) |
+| 工作区状态 | M8 收官同步中(.claude/docs/{SNAPSHOT,tasks}.md 已更新) |
+| 远端同步 | 11 个 commit 未 push(59a19a162 M4 收官 + 97bfd4a55 M5 docs + M6 docs + M6 archive + M7.1-4 docs + M8.A/B/C docs),待用户决定时机 |
 
 ---
 
@@ -114,14 +114,14 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M1 100% · M2 100% · M3 100% · M4 100% · M5 100% · M6 100% · **M7 100%(4/4 开发实践收官 — docs/24-27 全部完成,合计 3676 行;OpenSpec change `add-m7-dev-practice-docs` 待归档)** · **Embassy 学习项目 27/27 100% 收官**
+**当前阶段**：M1 100% · M2 100% · M3 100% · M4 100% · M5 100% · M6 100% · M7 100% · **M8 100%(3/3 附录收官 — appendix-a/b/c 全部完成,合计 1361 行;OpenSpec change `add-m8-appendices` 待归档)** · **Embassy 学习项目 30/30 100% 收官(27 主 + 3 附录)**
 
 **下一步**：
-1. /opsx:archive add-m7-dev-practice-docs
-2. push 全部待发 commit(M4 收官 + M5 + M6 + M7 4 篇)到远端,触发 GitHub Pages 部署 M3-M7 全 20 篇
-3. 附录 A/B/C(术语表/参考资料/示例索引)留作后续可选增量
+1. /opsx:archive add-m8-appendices
+2. push 全部待发 commit(M4 收官 + M5 + M6 + M7 4 篇 + M8 收官同步)到远端,触发 GitHub Pages 部署 M3-M7 + 附录 全 23 篇
+3. 学习项目 100% 收官,可考虑写项目结项报告
 
-**进度**：27/27 学习任务完成(100% 收官)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5)** · **M5 100%(完成,4/4 网络与通信收官)** · **M6 100%(完成,3/3 系统组件收官)** · **M7 100%(完成,4/4 开发实践收官)** · CLAUDE.md +1 新规则(禁用 emoji)
+**进度**：30/30 学习任务完成(100% 收官)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5)** · **M5 100%(完成,4/4 网络与通信收官)** · **M6 100%(完成,3/3 系统组件收官)** · **M7 100%(完成,4/4 开发实践收官)** · **附录 A/B/C 100%(完成,3/3)** · CLAUDE.md +1 新规则(禁用 emoji)
 
 ---
 
