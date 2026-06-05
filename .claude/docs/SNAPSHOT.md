@@ -87,9 +87,9 @@ embassy/                              # fork 自 embassy-rs/embassy
 | 属性 | 值 |
 |------|-----|
 | 当前分支 | main |
-| 最近提交 | 97bfd4a55 docs(M5): 4 篇网络与通信文档(embassy-net + embassy-usb + BLE + LoRa,合计 5124 行) |
-| 工作区状态 | 干净(仅 `.codegraph/daemon.pid` 被 git 标记 D,索引健康 46966 节点) |
-| 远端同步 | 2 个 commit 未 push(59a19a162 M4 收官同步 + 97bfd4a55 M5 文档),待用户决定时机 |
+| 最近提交 | cdc25b1b8 docs(M7.4): docs/27-patterns.md 常见设计模式总结(综合 12 节 2 Mermaid ~1204 行) |
+| 工作区状态 | M7 收官同步中(.claude/docs/{SNAPSHOT,tasks}.md 已更新) |
+| 远端同步 | 8 个 commit 未 push(59a19a162 M4 收官 + 97bfd4a55 M5 docs + M6 docs + M6 archive + M7.1-4 docs),待用户决定时机 |
 
 ---
 
@@ -114,15 +114,14 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M1 100% · M2 100% · M3 100% · M4 100% · M5 100% · **M6 100%(3/3 系统组件收官 — docs/21-23 全部完成,合计 3612 行;OpenSpec change `add-m6-system-components-docs` 待归档)** · **M7 待启动(dev-setup / debugging / testing / patterns)**
+**当前阶段**：M1 100% · M2 100% · M3 100% · M4 100% · M5 100% · M6 100% · **M7 100%(4/4 开发实践收官 — docs/24-27 全部完成,合计 3676 行;OpenSpec change `add-m7-dev-practice-docs` 待归档)** · **Embassy 学习项目 27/27 100% 收官**
 
 **下一步**：
-1. 统一 commit M6(docs/21-23 + mkdocs.yml + openspec/changes/add-m6-* + .claude/docs/{SNAPSHOT,tasks}.md)
-2. /opsx:archive add-m6-system-components-docs
-3. push 全部待发 commit(M4 收官 + M5 + M6)到远端,触发 GitHub Pages 部署 M3-M6 全 16 篇
-4. /opsx:propose 启动 M7 开发实践(预计 9h)
+1. /opsx:archive add-m7-dev-practice-docs
+2. push 全部待发 commit(M4 收官 + M5 + M6 + M7 4 篇)到远端,触发 GitHub Pages 部署 M3-M7 全 20 篇
+3. 附录 A/B/C(术语表/参考资料/示例索引)留作后续可选增量
 
-**进度**：23/27 学习任务完成(85%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5)** · **M5 100%(完成,4/4 网络与通信收官)** · **M6 100%(完成,3/3 系统组件收官)** · CLAUDE.md +1 新规则(禁用 emoji)
+**进度**：27/27 学习任务完成(100% 收官)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5)** · **M5 100%(完成,4/4 网络与通信收官)** · **M6 100%(完成,3/3 系统组件收官)** · **M7 100%(完成,4/4 开发实践收官)** · CLAUDE.md +1 新规则(禁用 emoji)
 
 ---
 
