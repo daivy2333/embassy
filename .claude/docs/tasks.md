@@ -209,3 +209,4 @@
 | 2026-06-05 | M2.2 `learn/05-time.md` 撰写完成 | ✅ 完成 |
 | 2026-06-05 | M2.3 `learn/06-sync.md` 撰写完成 | ✅ 完成 |
 | 2026-06-05 | M2.4 `learn/07-futures.md` 撰写完成 | ✅ 完成 |
+| 2026-06-05 | GitHub Pages 文档站搭建(MkDocs Material,旁支基础设施) | ✅ 完成 |

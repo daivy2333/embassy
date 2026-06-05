@@ -78,7 +78,44 @@
 
 ## 技巧模式
 
-（待填充）
+### MkDocs Material 中文技术文档站(2026-06-05)
+
+**适用场景**:中文 + 大量代码片段 + Mermaid 图 + 表格的技术文档,部署到 GitHub Pages。
+
+**核心配置要点**:
+
+| 维度 | 配置 |
+|------|------|
+| 主题 | `theme.name: material` + `language: zh` |
+| Mermaid 渲染 | `pymdownx.superfences` + `custom_fences: name=mermaid` 一行搞定(Material 9.5+ 内建 Mermaid.js) |
+| 中文搜索 | `plugins.search.lang: [zh, en]`(无需 jieba 插件,Material 内建 Lunr 中文分词) |
+| 暗色跟随系统 | `palette` 两段配置 + `media: "(prefers-color-scheme: ...)"` |
+| 字体 | `theme.font.text: Noto Sans SC`(中文) + `code: JetBrains Mono` |
+| 代码复制按钮 | `features: content.code.copy` 一行 |
+| 排除文件 | `not_in_nav: \|\n  /README.md`(避免 README.md 和 index.md 双首页冲突) |
+
+**GitHub Pages 部署模式选择(★ 易踩坑)**:
+
+```
+错误:Settings → Pages → Source = "Deploy from a branch" + main/docs
+  → GitHub 用默认 Jekyll,只渲染 README,看不到导航
+
+正确:Settings → Pages → Source = "GitHub Actions"
+  → 让 .github/workflows/docs.yml 控制构建产物,部署到 gh-pages 环境
+```
+
+**Workflow 关键设置**:
+- `permissions: pages: write + id-token: write`(部署 Pages 必需)
+- `concurrency.group: pages` + `cancel-in-progress: false`(避免并发部署冲突)
+- `mkdocs build --strict`(broken link 直接失败,质量门)
+- `fetch-depth: 0`(若用 git-revision-date 插件需要完整 history)
+
+**预防项**:
+1. `.gitignore` 必须加 `site/`(MkDocs build 输出,不要 commit)
+2. `Settings → Actions → General → Workflow permissions = Read and write`(否则部署 403)
+3. 本地 `python3 -c "yaml.unsafe_load(open('mkdocs.yml'))"` 会因为 `!!python/name:` tag 报错,这是预期(需先装 mkdocs-material),CI 里没问题
+
+**参考来源**:本项目 `mkdocs.yml` + `.github/workflows/docs.yml`(2026-06-05 搭建)。
 
 ---
 

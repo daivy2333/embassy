@@ -6,6 +6,8 @@ third_party
 webroot
 /Cargo.toml
 out/
+# MkDocs build output
+site/
 # editor artifacts
 .zed
 .neoconf.json

@@ -1,0 +1,4 @@
+# MkDocs Material 文档站依赖
+# 用于 GitHub Actions 自动构建,也可本地 `pip install -r requirements.txt` 后 `mkdocs serve` 预览
+mkdocs-material>=9.5.0
+pymdown-extensions>=10.7.0

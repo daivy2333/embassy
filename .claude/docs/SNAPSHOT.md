@@ -66,7 +66,7 @@ embassy/
 |------|-----|
 | 当前分支 | main |
 | 最近提交 | e44d3a22e tasks: 补打 M2 收官验收标准 3 项 |
-| 工作区状态 | 12 个 deleted(LICENSE/CI/release 残余)+ 7 个 untracked(.claude/、.codegraph/、CLAUDE.md、learn/、openspec/),均未提交 |
+| 工作区状态 | 12 deleted(LICENSE/CI 残余)+ 修改 .gitignore + 新增 mkdocs.yml / requirements.txt / docs/index.md / .github/workflows/docs.yml + .claude/docs/superpowers/ 等学习项目目录,均未提交 |
 
 ---
 
@@ -78,8 +78,12 @@ embassy/
 | `rustfmt.toml` | 格式化配置 |
 | `.vscode/settings.json` | VS Code / Rust Analyzer 配置 |
 | `CLAUDE.md` | 项目入口与规则索引(学习项目) |
-| `learn/README.md` | 学习文档体系目录 |
+| `docs/index.md` | MkDocs 文档站首页(M1/M2 索引) |
+| `mkdocs.yml` | MkDocs Material 站点配置 |
+| `requirements.txt` | MkDocs Python 依赖 |
+| `.github/workflows/docs.yml` | GitHub Pages 自动部署 workflow |
 | `openspec/config.yaml` | OpenSpec 配置 |
+| ~~`learn/README.md`~~ | ⚠️ 内容已迁移至 `docs/`(用户重命名 learn → docs) |
 | ~~`ci.sh` / `fmtall.sh` / `fmtall.ps1`~~ | ⚠️ fork 残余,已删除(学习项目不发布) |
 
 ---
@@ -88,13 +92,14 @@ embassy/
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：✅ M2 收官（核心组件 4/4 完成），进入 M3 候选
+**当前阶段**：✅ M2 收官（核心组件 4/4 完成）+ GitHub Pages 文档站搭建完成（待 push 触发部署），进入 M3 候选
 
 **下一步**：
-1. 启动 M3.1 — `learn/08-hal-architecture.md`（HAL 层架构设计与 embedded-hal trait）
-2. 或 M3.2/3.3/3.4 — 选择具体平台 HAL（stm32/nrf/rp）
+1. push 触发 GitHub Pages 首次部署（`git push origin main` 后访问 `https://daivy2333.github.io/embassy/`）
+2. 启动 M3.1 — `docs/08-hal-architecture.md`（HAL 层架构设计与 embedded-hal trait）
+3. 或 M3.2/3.3/3.4 — 选择具体平台 HAL（stm32/nrf/rp）
 
-**进度**：7/27 任务完成（26%）· M1 100% ✅ · M2 100% ✅
+**进度**：7/27 学习任务完成（26%）· M1 100% ✅ · M2 100% ✅ · 基础设施 +1（GitHub Pages）
 
 ---
 
@@ -109,3 +114,4 @@ embassy/
 | Optimization spec | ✅ 已创建 | `openspec/specs/optimization/spec.md` |
 | CLAUDE.md | ✅ 已创建 | `CLAUDE.md` |
 | CodeGraph 索引 | ✅ healthy | `.codegraph/` |
+| GitHub Pages 站 | 🚀 已配置,待 push 触发 | `mkdocs.yml` + `.github/workflows/docs.yml` |
