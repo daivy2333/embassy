@@ -78,6 +78,11 @@ nav:
     - 14 SPI 总线: 14-spi.md
     - 15 I2C 总线: 15-i2c.md
     - 16 定时器与 PWM: 16-timer.md
+  - M5 网络与通信:
+    - 17 embassy-net 网络栈: 17-net.md
+    - 18 embassy-usb 设备栈: 18-usb.md
+    - 19 BLE 协议(平台中立): 19-ble.md
+    - 20 LoRa 远程通信(说明): 20-lora.md
 
 # 排除 docs/ 下不参与构建的文件(build 阶段就剔除,不读不渲染)
 # 注意:必须用 exclude_docs 而不是 not_in_nav。

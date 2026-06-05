@@ -114,12 +114,13 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M1 100% · M2 100% · **M3 100%(4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** · **M4 100%(5/5 — GPIO + UART + SPI + I2C + Timer,commit a935af221, 4988 行)** · ADR-004 入档 · GitHub Pages 文档站搭建完成
+**当前阶段**：M1 100% · M2 100% · M3 100% · **M4 100%(5/5 外设驱动收官)** · **M5 100%(4/4 网络与通信收官 — docs/17-20 全部完成,5124 行)** · OpenSpec change `add-m5-network-comms-docs` 待归档
 
 **下一步**：
-1. push M4 commit (a935af221) 到远端(由用户决定时机)
-2. push 后自动触发 GitHub Pages 部署
-3. 启动 M5.1 embassy-net 网络栈分析(`docs/17-net.md`)
+1. 更新 SNAPSHOT.md + tasks.md 反映 M5 收官(本轮)
+2. commit M5 4 篇 + mkdocs.yml + SNAPSHOT/tasks 同步
+3. /opsx:archive add-m5-network-comms-docs
+4. push 后自动触发 GitHub Pages 部署
 
 **进度**：16/27 学习任务完成(59%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5 外设驱动收官)** · CLAUDE.md +1 新规则(禁用 emoji)
 
