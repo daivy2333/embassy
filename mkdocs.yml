@@ -16,7 +16,6 @@ copyright: Copyright &copy; 2026 daivy · 基于 Embassy(<a href="https://github
 theme:
   name: material
   language: zh
-  custom_dir: null
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default

@@ -72,7 +72,27 @@
 
 ## 踩坑档案
 
-（待填充）
+### MkDocs `custom_dir: null` 触发 TypeError(2026-06-05)
+
+**症状**:GitHub Actions 跑 `mkdocs build --strict` 报错:
+
+```
+File "mkdocs/config/config_options.py", line 844, in run_validation
+    if 'custom_dir' in theme_config and not os.path.isabs(theme_config['custom_dir']):
+TypeError: expected str, bytes or os.PathLike object, not NoneType
+```
+
+**根因**:`mkdocs.yml` 写了 `theme.custom_dir: null`(本想"显式声明不用自定义模板")。
+MkDocs validator 用 `if 'custom_dir' in theme_config` 判断 key 是否存在 — `null` 也算"存在",然后 `os.path.isabs(None)` 直接炸。
+
+**解决**:**删除** `custom_dir: null` 这一行。MkDocs 默认就没这个 key,根本不需要"显式 null"。
+
+**预防**:
+- 不要在 `mkdocs.yml` 里写"显式 null"占位(`key: null` / `key: ~` / `key:` 留空均不可)
+- "我不用这个特性"= 不写,**不是**写 null
+- 这与 Python `dict.get(k, None)` 的容忍语义不同,YAML schema validator 严格区分"key 存在但值是 None" vs "key 不存在"
+
+**适用范围**:同样的雷区可能存在于其它 MkDocs config options(只要 validator 写了 `if 'X' in cfg:` 后直接对值操作)。配置项若官方文档说"optional",意思是"可省略",不是"可写 null"。
 
 ---
 
