@@ -92,14 +92,14 @@ embassy/
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：✅ M2 收官（核心组件 4/4 完成）+ GitHub Pages 文档站搭建完成（待 push 触发部署），进入 M3 候选
+**当前阶段**：M2 收官(完成 4/4)+ M3.1 完成（HAL 架构 727 行）+ ADR-004 入档 + GitHub Pages 文档站搭建完成
 
 **下一步**：
-1. push 触发 GitHub Pages 首次部署（`git push origin main` 后访问 `https://daivy2333.github.io/embassy/`）
-2. 启动 M3.1 — `docs/08-hal-architecture.md`（HAL 层架构设计与 embedded-hal trait）
-3. 或 M3.2/3.3/3.4 — 选择具体平台 HAL（stm32/nrf/rp）
+1. push 触发 GitHub Pages 部署（`git push origin main`）
+2. 启动 M3.2 — `docs/09-stm32.md`（stm32 平台,按 ADR-004 模板）
+3. 或 M3.3 — `docs/10-nrf.md`、M3.4 — `docs/11-rp.md`
 
-**进度**：7/27 学习任务完成（26%）· M1 100% ✅ · M2 100% ✅ · 基础设施 +1（GitHub Pages）
+**进度**：8/27 学习任务完成（30%）· M1 100%(完成) · M2 100%(完成) · M3 25% (1/4) · CLAUDE.md +1 新规则（禁用 emoji）
 
 ---
 
