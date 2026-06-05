@@ -86,14 +86,13 @@ embassy/
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：✅ M1 收官（基础架构 3/3 完成），进入 M2 候选
+**当前阶段**：✅ M2 收官（核心组件 4/4 完成），进入 M3 候选
 
 **下一步**：
-1. 启动 M2.1 — `learn/04-executor.md`（任务调度原理，承接 M1.3 的 poll 函数）
-2. 或 M2.2 — `learn/05-time.md`（时间管理）
-3. 或 M2.3 — `learn/06-sync.md`（同步原语）
+1. 启动 M3.1 — `learn/08-hal-architecture.md`（HAL 层架构设计与 embedded-hal trait）
+2. 或 M3.2/3.3/3.4 — 选择具体平台 HAL（stm32/nrf/rp）
 
-**进度**：3/27 任务完成（11%）· M1 基础架构 100% 收官
+**进度**：7/27 任务完成（26%）· M1 100% ✅ · M2 100% ✅
 
 ---
 
