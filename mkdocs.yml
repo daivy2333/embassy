@@ -55,7 +55,6 @@ theme:
     view: material/eye
 
 # Navigation
-# 注:M4-M7 章节文件创建后再添加到 nav,否则 mkdocs build --strict 会报错
 nav:
   - 首页: index.md
   - 项目概览: embassy.md
@@ -73,6 +72,12 @@ nav:
     - 09 stm32 平台: 09-stm32.md
     - 10 nrf 平台: 10-nrf.md
     - 11 rp 平台(PIO + Multicore): 11-rp.md
+  - M4 外设驱动:
+    - 12 GPIO 与中断: 12-gpio.md
+    - 13 UART 串口: 13-uart.md
+    - 14 SPI 总线: 14-spi.md
+    - 15 I2C 总线: 15-i2c.md
+    - 16 定时器与 PWM: 16-timer.md
 
 # 排除 docs/ 下不参与构建的文件(build 阶段就剔除,不读不渲染)
 # 注意:必须用 exclude_docs 而不是 not_in_nav。

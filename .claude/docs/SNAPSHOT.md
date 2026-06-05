@@ -87,9 +87,9 @@ embassy/                              # fork 自 embassy-rs/embassy
 | 属性 | 值 |
 |------|-----|
 | 当前分支 | main |
-| 最近提交 | 271d25a1d chore(docs): M3 收官 + mkdocs.yml nav 加入 M3 全 4 篇 + 状态同步 |
-| 工作区状态 | 干净(最近 commit c83476a11 全项目文档批量更新) |
-| 远端同步 | 上轮 8 commits 已 push(M3.1-3.4 + ADR-004 + CLAUDE.md 规则) |
+| 最近提交 | a935af221 docs(M4): 5 篇外设驱动(GPIO + UART + SPI + I2C + Timer,合计 4988 行) |
+| 工作区状态 | 干净(仅 `.codegraph/daemon.pid` 被 git 标记 D,索引健康 46966 节点) |
+| 远端同步 | M4 commit (a935af221) 未 push,待用户决定时机 |
 
 ---
 
@@ -114,12 +114,12 @@ embassy/                              # fork 自 embassy-rs/embassy
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M2 收官(完成 4/4)+ **M3 收官(完成 4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** + **M4 收官(完成 5/5 — GPIO + UART + SPI + I2C + Timer)** + ADR-004 入档 + GitHub Pages 文档站搭建完成
+**当前阶段**：M1 100% · M2 100% · **M3 100%(4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** · **M4 100%(5/5 — GPIO + UART + SPI + I2C + Timer,commit a935af221, 4988 行)** · ADR-004 入档 · GitHub Pages 文档站搭建完成
 
 **下一步**：
-1. M4 5 篇全完成,准备一次性 commit(5 docs + 5 plans + 同步文件)
-2. push 触发 GitHub Pages 部署(由用户决定时机)
-3. 启动 M5 网络与通信栈(`docs/17-net.md` 起)
+1. push M4 commit (a935af221) 到远端(由用户决定时机)
+2. push 后自动触发 GitHub Pages 部署
+3. 启动 M5.1 embassy-net 网络栈分析(`docs/17-net.md`)
 
 **进度**：16/27 学习任务完成(59%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · **M4 100%(完成,5/5 外设驱动收官)** · CLAUDE.md +1 新规则(禁用 emoji)
 
@@ -136,4 +136,4 @@ embassy/                              # fork 自 embassy-rs/embassy
 | Optimization spec | (已创建,OPT-001 已完成) | `openspec/specs/optimization/spec.md` |
 | CLAUDE.md | (已创建 + 文档撰写规范已加) | `CLAUDE.md` |
 | CodeGraph 索引 | (健康,46966 节点 / 1953 Rust 文件)| `.codegraph/` |
-| GitHub Pages 站 | (已部署,M3 全 4 篇已加入侧栏) | `mkdocs.yml` + `.github/workflows/docs.yml` |
+| GitHub Pages 站 | (M3 全 4 篇已加入 nav;M4 5 篇待追加后才能 build/push) | `mkdocs.yml` + `.github/workflows/docs.yml` |
