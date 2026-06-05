@@ -72,6 +72,39 @@
 
 ## 踩坑档案
 
+### MkDocs `not_in_nav` vs `exclude_docs` 混淆(2026-06-05)
+
+**症状**:`mkdocs build --strict` 在 GitHub Actions 失败:
+
+```
+WARNING - Excluding 'README.md' from the site because it conflicts with 'index.md'.
+Aborted with 1 warnings in strict mode!
+```
+
+**根因**:
+- 配了 `not_in_nav: |\n  /README.md` 想"排除 README.md"
+- `not_in_nav` 只控制"不放进侧边栏导航",**不阻止 build**
+- MkDocs 仍 build `docs/README.md`,在 `use_directory_urls: true` 下它和 `docs/index.md` **都映射到 `/index.html`**
+- MkDocs 检测到 URL 冲突 → 发 WARNING → `--strict` 把 WARNING 当 Error → 失败
+
+**解决**:用 `exclude_docs`(MkDocs 1.5+),build 阶段就剔除文件:
+
+```yaml
+# ❌ 错误:仍会 build,只是不进导航
+not_in_nav: |
+  /README.md
+
+# ✅ 正确:build 阶段就跳过,不读不渲染
+exclude_docs: |
+  README.md
+```
+
+**预防**:
+- `not_in_nav` 适用场景:**文件需要存在且需要被构建**(比如有内部链接指向),但不希望出现在侧栏顶级导航
+- `exclude_docs` 适用场景:**文件完全不参与文档站**(比如 README、CHANGELOG、内部草稿)
+- 两者 pattern 语法不同:`not_in_nav` 用 gitignore 风格(带前导 `/` 表示根),`exclude_docs` 用 gitignore-style 但相对于 `docs_dir`(`README.md` 即可)
+- 一旦开了 `--strict`,任何 WARNING 都会 fail,所以必须用正确 API 而不是"压住报错"
+
 ### MkDocs `custom_dir: null` 触发 TypeError(2026-06-05)
 
 **症状**:GitHub Actions 跑 `mkdocs build --strict` 报错:
