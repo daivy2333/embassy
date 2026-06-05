@@ -92,14 +92,15 @@ embassy/
 
 **项目定位**：学习研究项目（fork 自 embassy-rs/embassy）
 
-**当前阶段**：M2 收官(完成 4/4)+ M3.1 完成（HAL 架构 727 行）+ ADR-004 入档 + GitHub Pages 文档站搭建完成
+**当前阶段**：M2 收官(完成 4/4)+ **M3 收官(完成 4/4 — HAL 通论 + stm32/nrf/rp 3 平台)** + ADR-004 入档 + GitHub Pages 文档站搭建完成
 
 **下一步**：
-1. push 触发 GitHub Pages 部署（`git push origin main`）
-2. 启动 M3.2 — `docs/09-stm32.md`（stm32 平台,按 ADR-004 模板）
-3. 或 M3.3 — `docs/10-nrf.md`、M3.4 — `docs/11-rp.md`
+1. push 触发 GitHub Pages 部署(commit/push 由用户决定时机)
+2. M3 全 4 篇待加入 mkdocs.yml nav(目前 nav 只到 M2)
+3. 启动 M4 外设驱动系列(`docs/12-gpio.md` 起,5 篇)
+4. 或 OPT-001 历史 emoji 清理(30-45min,顺手清规范一致性)
 
-**进度**：8/27 学习任务完成（30%）· M1 100%(完成) · M2 100%(完成) · M3 25% (1/4) · CLAUDE.md +1 新规则（禁用 emoji）
+**进度**：11/27 学习任务完成(41%)· M1 100%(完成) · M2 100%(完成) · **M3 100%(完成,4/4)** · CLAUDE.md +1 新规则(禁用 emoji)
 
 ---
 
